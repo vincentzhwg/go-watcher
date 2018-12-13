@@ -7,6 +7,7 @@ package watcher
 import (
 	"log"
 	"os/exec"
+	"syscall"
 
 	"github.com/fatih/color"
 )
@@ -63,7 +64,8 @@ func (r *Runner) restart(fileName string) {
 
 func (r *Runner) kill(cmd *exec.Cmd) {
 	if cmd != nil {
-		cmd.Process.Kill()
+		//cmd.Process.Kill()
+		cmd.Process.Signal(syscall.SIGTERM)
 	}
 }
 
